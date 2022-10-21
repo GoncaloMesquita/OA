@@ -13,11 +13,13 @@ T = size(q,2);
 x_initial = [1;1;0;0];
 Lambda_values = cell(1,size(lambdas,2));
 
+%% Run simulation
 for i = 1:size(lambdas,2)
     cvx_begin quiet
     
         variable x(4,T);
         variable u(2,T-1);
+        
         % Compute TE
         TE_aux{i} = 0;
         for k = 1:T
@@ -30,10 +32,7 @@ for i = 1:size(lambdas,2)
             CE_aux{i} = CE_aux{i} + sum_square(u(:,k));
         end
 
-%         minimize(sum(norms(E*x-q,inf)) + lambdas(i)*sum(power(2,norms(u,2,1))));
         minimize(TE_aux{i} + lambdas(i)*CE_aux{i});
-        
-        
         
         % subject to
         x(:,1) == x_initial;
@@ -44,7 +43,9 @@ for i = 1:size(lambdas,2)
     cvx_end;
     TE = cell2mat(TE_aux);
     CE = cell2mat(CE_aux);
-    Lambda_values{i} = sprintf('λ_{%.f} = %.3f', i, lambdas(i));
+    Lambda_values{i} = sprintf('\\lambda_{%.f} = %.3f', i, lambdas(i));
+    
+    % Position Plots
     figure;
     plot(x(1,:),x(2,:),'-r.','DisplayName',sprintf('Position for lambda = %.3f', lambdas(i)))
     hold on
@@ -52,6 +53,8 @@ for i = 1:size(lambdas,2)
     legend
     axis([-1.5 1.5 -1.5 1.5])    
 end
+
+% Lambda Plots
 figure;
 scatter(TE,CE,'b.')
 text(TE+0.3,CE+0.3,Lambda_values,'Fontsize', 8,'HorizontalAlignment', 'left','VerticalAlignment', 'bottom');
