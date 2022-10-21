@@ -43,7 +43,7 @@ for i = 1:size(lambdas,2)
     cvx_end;
     TE = cell2mat(TE_aux);
     CE = cell2mat(CE_aux);
-    Lambda_values{i} = sprintf('\\lambda_{%.f} = %.3f', i, lambdas(i));
+    Lambda_values{i} = sprintf('\\lambda_{%.f} = %g', i, lambdas(i));
     
     % Position Plots
     figure;
@@ -56,8 +56,8 @@ end
 
 % Lambda Plots
 figure;
-scatter(TE,CE,'b.')
-text(TE+0.3,CE+0.3,Lambda_values,'Fontsize', 8,'HorizontalAlignment', 'left','VerticalAlignment', 'bottom');
+scatter(TE,CE,'b','filled')
+text(TE+0.1,CE,Lambda_values,'Fontsize', 11,'HorizontalAlignment', 'left','VerticalAlignment', 'bottom');
 xlabel('TE')
 ylabel('CE')
 grid on

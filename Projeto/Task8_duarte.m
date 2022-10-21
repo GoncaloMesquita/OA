@@ -3,7 +3,8 @@ clearvars;
 close all;
 
 %% Initialization of parameters
-
+global r1
+global r2
 load('measurements.mat'); % r1 and r2
 
 global s1
