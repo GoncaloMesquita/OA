@@ -68,7 +68,7 @@ cvx_end;
 %plot trajectory of target and vehicle
 figure;
 hold on
-plot(x1(1,:),x1(2,:),'.-k','MarkerSize',10,'LineWidth',1,'DisplayName','Trajectory of our vehicle');
+plot(x1(1,:),x1(2,:),'.-k','MarkerSize',10,'LineWidth',1,'DisplayName','Possible trajectories of our vehicle');
 plot(x2(1,:),x2(2,:),'.-k','MarkerSize',10,'LineWidth',1,'HandleVisibility','off');
 plot(q1(1,:),q1(2,:),'.-r','MarkerSize',10,'LineWidth',1,'DisplayName','Target trajectory 1');
 plot(q2(1,:),q2(2,:),'.-m','MarkerSize',10,'LineWidth',1,'DisplayName','Target trajectory 2');
